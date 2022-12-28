@@ -3,16 +3,16 @@ const GRID_WIDTH = 10;
 const GRID_HEIGHT = 10;
 
 // Define the possible states for each cell
-const ROCK = 0;
-const PAPER = 1;
-const SCISSORS = 2;
+const ROCK = "R";
+const PAPER = "P";
+const SCISSORS = "S";
 
 // Create the grid and initialize each cell with a random state
 let grid = [];
 for (let i = 0; i < GRID_HEIGHT; i++) {
   let row = [];
   for (let j = 0; j < GRID_WIDTH; j++) {
-    row.push(Math.floor(Math.random() * 3));
+    row.push("RPS"[Math.floor(Math.random() * 3]));
   }
   grid.push(row);
 }
@@ -20,15 +20,15 @@ for (let i = 0; i < GRID_HEIGHT; i++) {
 // Define the rules of the game
 function playMatch(player1, player2) {
   if (player1 === player2) {
-    return "tie";
+    return player1;
   } else if (
     (player1 === ROCK && player2 === SCISSORS) ||
     (player1 === SCISSORS && player2 === PAPER) ||
     (player1 === PAPER && player2 === ROCK)
   ) {
-    return "player1";
+    return player1;
   } else {
-    return "player2";
+    return player2;
   }
 }
 
@@ -72,35 +72,14 @@ setInterval(() => {
     for (let j = 0; j < GRID_WIDTH; j++) {
       // Get the moves of the current cell and its neighbors
       let cellMove = grid[i][j];
-      let topMove = grid[i - 1] ? grid[i - 1][j] : Math.floor(Math.random() * 3);
-      let bottomMove = grid[i + 1] ? grid[i + 1][j] : Math.floor(Math.random() * 3);
-      let leftMove = grid[i][j - 1] ? grid[i][j - 1] : Math.floor(Math.random() * 3);
-      let rightMove = grid[i][j + 1] ? grid[i][j + 1] : Math.floor(Math.random() * 3);
-
-      // Play a match against the appropriate neighbors and update the cell's state based on the result
-      if (i % 2 === 0) {
-        // Play against row neighbors
-        if (playMatch(cellMove, topMove) === "player1") {
-          newGrid[i][j] = cellMove;
-        } else if (playMatch(cellMove, topMove) === "player2") {
-          newGrid[i][j] = topMove;
-        } else if (playMatch(cellMove, bottomMove) === "player1") {
-          newGrid[i][j] = cellMove;
-        } else if (playMatch(cellMove, bottomMove) === "player2") {
-          newGrid[i][j] = bottomMove;
-        }
-      } else {
-        // Play against column neighbors
-        if (playMatch(cellMove, leftMove) === "player1") {
-          newGrid[i][j] = cellMove;
-        } else if (playMatch(cellMove, leftMove) === "player2") {
-          newGrid[i][j] = leftMove;
-        } else if (playMatch(cellMove, rightMove) === "player1") {
-          newGrid[i][j] = cellMove;
-        } else if (playMatch(cellMove, rightMove) === "player2") {
-          newGrid[i][j] = rightMove;
-        }
-      }
+      let topMove = grid[(i - 1) % GRID_WIDTH][j];
+      let bottomMove = grid[(i + 1) % GRID_WIDTH][j];
+      let leftMove = grid[i][(j - 1) % GRID_HEIGHT];
+      let rightMove = grid[i][(j - 1) % GRID_HEIGHT];
+      if (i % 4 === 0) { newGrid[i][j] = playMatch(cellMove, topMove); }
+      if (i % 4 === 1) { newGrid[i][j] = playMatch(cellMove, leftMove); }
+      if (i % 4 === 2) { newGrid[i][j] = playMatch(cellMove, bottomMove); }
+      if (i % 4 === 3) { newGrid[i][j] = playMatch(cellMove, rightMove); }
     }
   }
 
