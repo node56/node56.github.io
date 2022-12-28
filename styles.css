@@ -1,0 +1,29 @@
+#grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px;
+  height: 600px;
+  border: 1px solid #ccc;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+}
+
+.rock {
+  background-color: gray;
+}
+
+.paper {
+  background-color: white;
+}
+
+.scissors {
+  background-color: silver;
+}
