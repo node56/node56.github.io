@@ -12,7 +12,7 @@ let grid = [];
 for (let i = 0; i < GRID_HEIGHT; i++) {
   let row = [];
   for (let j = 0; j < GRID_WIDTH; j++) {
-    row.push("RPS"[Math.floor(Math.random() * 3]));
+    row.push("RPS"[Math.floor(Math.random() * 3)]);
   }
   grid.push(row);
 }
