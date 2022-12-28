@@ -74,7 +74,7 @@ setInterval(() => {
       let cellMove = grid[i][j];
       let topMove = grid[i - 1] ? grid[i - 1][j] : Math.floor(Math.random() * 3);
       let bottomMove = grid[i + 1] ? grid[i + 1][j] : Math.floor(Math.random() * 3);
-      let leftMove = grid[i][j - 1] ?
+      let leftMove = grid[i][j - 1] ? grid[i][j - 1] : Math.floor(Math.random() * 3);
       let rightMove = grid[i][j + 1] ? grid[i][j + 1] : Math.floor(Math.random() * 3);
 
       // Play a match against the appropriate neighbors and update the cell's state based on the result
