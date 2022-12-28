@@ -1,6 +1,6 @@
 // Define the size of the grid
-const GRID_WIDTH = 10;
-const GRID_HEIGHT = 10;
+const GRID_WIDTH = 30;
+const GRID_HEIGHT = 30;
 
 // Define the possible states for each cell
 const ROCK = "R";
