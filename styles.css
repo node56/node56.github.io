@@ -29,25 +29,8 @@
 }
 
 /* Style the canvas element */
-#rock-chart {
-  display: flex;
+#chart-parent {
+  position: relative;
   width: 660px;
   height: 300px;
-}
-
-/* Style the x-axis label */
-#rock-chart .chartjs-render-monitor .chartjs-xaxis-label {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-/* Style the y-axis label */
-#rock-chart .chartjs-render-monitor .chartjs-yaxis-label {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-/* Style the legend */
-#rock-chart .chartjs-render-monitor .chartjs-legend {
-  font-size: 14px;
 }
