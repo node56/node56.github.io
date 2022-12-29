@@ -30,6 +30,7 @@
 
 /* Style the canvas element */
 #rock-chart {
+  display: flex;
   width: 660px;
   height: 300px;
 }
