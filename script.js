@@ -125,11 +125,11 @@ setInterval(() => {
       let bottomMove = grid[(i + 1) % GRID_WIDTH][j];
       let leftMove = grid[i][(j + GRID_HEIGHT -1) % GRID_HEIGHT];
       let rightMove = grid[i][(j + 1) % GRID_HEIGHT];
-      round = Math.floor(Math.random() * 4)
-      if (round % 4 === 0) { newGrid[i][j] = playMatch(cellMove, topMove); }
-      if (round % 4 === 1) { newGrid[i][j] = playMatch(cellMove, leftMove); }
-      if (round % 4 === 2) { newGrid[i][j] = playMatch(cellMove, bottomMove); }
-      if (round % 4 === 3) { newGrid[i][j] = playMatch(cellMove, rightMove); }
+      dir = Math.floor(Math.random() * 4)
+      if (dri % 4 === 0) { newGrid[i][j] = playMatch(cellMove, topMove); }
+      if (dir % 4 === 1) { newGrid[i][j] = playMatch(cellMove, leftMove); }
+      if (dir % 4 === 2) { newGrid[i][j] = playMatch(cellMove, bottomMove); }
+      if (dir % 4 === 3) { newGrid[i][j] = playMatch(cellMove, rightMove); }
       let c = newGrid[i][j];
       if (c === "R") rockTotal++;
       if (c === "P") paperTotal++;
@@ -167,9 +167,15 @@ setInterval(() => {
   let scissorsProportion = scissorsTotal / total;
 
   // Update the chart data
-  stackedProportionsChart.data.labels.push(Date.now()); // Add a new label for the current time
+  stackedProportionsChart.data.labels.push(round); // Add a new label for the current time
   stackedProportionsChart.data.datasets[0].data.push(rockProportion); // Add a new data point for the rock proportion
   stackedProportionsChart.data.datasets[1].data.push(paperProportion); // Add a new data point for the paper proportion
   stackedProportionsChart.data.datasets[2].data.push(scissorsProportion); // Add a new data point for the scissors proportion
+  if (round > 100) {
+    stackedProportionsChart.data.labels.shift();
+    stackedProportionsChart.data.datasets[0].data.shift();
+    stackedProportionsChart.data.datasets[1].data.shift();
+    stackedProportionsChart.data.datasets[2].data.shift();
+  }
   stackedProportionsChart.update(); // Update the chart
 }, 200);
