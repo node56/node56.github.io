@@ -154,8 +154,8 @@ setInterval(() => {
 
   // Calculate the proportions of each item
   let rockProportion = rockTotal / total;
-  let paperProportion = paperTotal / total + paperProportion;
-  let scissorsProportion = scissorsTotal / total + scissorsProportion;
+  let paperProportion = paperTotal / total + rockProportion;
+  let scissorsProportion = scissorsTotal / total + paperProportion;
 
   // Update the chart data
   stackedProportionsChart.data.labels.push(round);
