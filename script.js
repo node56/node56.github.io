@@ -26,7 +26,7 @@ let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
   options: {
     scales: {
       y: {
-        SuggestedMin: 0
+        suggestedMin: 0
       }
     },
     elements: {
@@ -130,7 +130,7 @@ setInterval(() => {
       if (c === "S") scissorsTotal++;
     }
   }
-  round = round + 1;
+  round++;
  
   // Update the grid with the new state of each cell
   grid = newGrid;
