@@ -26,9 +26,10 @@ let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
   options: {
     responsive: true, // Make the chart responsive to the size of the canvas
     scales: {
-      y: [{
-        stacked: true,
-      }]
+      xAxis: {
+      },
+      yAxis: {
+      }
     }
   }
 });
