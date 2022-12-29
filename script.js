@@ -72,10 +72,10 @@ setInterval(() => {
     for (let j = 0; j < GRID_WIDTH; j++) {
       // Get the moves of the current cell and its neighbors
       let cellMove = grid[i][j];
-      let topMove = grid[(i - 1) % GRID_WIDTH][j];
+      let topMove = grid[(i + GRID_WIDTH -1) % GRID_WIDTH][j];
       let bottomMove = grid[(i + 1) % GRID_WIDTH][j];
-      let leftMove = grid[i][(j - 1) % GRID_HEIGHT];
-      let rightMove = grid[i][(j - 1) % GRID_HEIGHT];
+      let leftMove = grid[i][(j + GRID_HEIGHT -1) % GRID_HEIGHT];
+      let rightMove = grid[i][(j + 1) % GRID_HEIGHT];
       if (i % 4 === 0) { newGrid[i][j] = playMatch(cellMove, topMove); }
       if (i % 4 === 1) { newGrid[i][j] = playMatch(cellMove, leftMove); }
       if (i % 4 === 2) { newGrid[i][j] = playMatch(cellMove, bottomMove); }
