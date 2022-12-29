@@ -40,6 +40,7 @@ let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
         stacked: true, // Stack the datasets
       }]
     }
+    spanGaps: false,
   }
 });
 
