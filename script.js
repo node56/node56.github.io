@@ -6,7 +6,7 @@ const GRID_HEIGHT = 30;
 const ROCK = "R";
 const PAPER = "P";
 const SCISSORS = "S";
-
+let round = 0;
 // Create the grid and initialize each cell with a random state
 let grid = [];
 for (let i = 0; i < GRID_HEIGHT; i++) {
@@ -76,13 +76,14 @@ setInterval(() => {
       let bottomMove = grid[(i + 1) % GRID_WIDTH][j];
       let leftMove = grid[i][(j + GRID_HEIGHT -1) % GRID_HEIGHT];
       let rightMove = grid[i][(j + 1) % GRID_HEIGHT];
-      if (i % 4 === 0) { newGrid[i][j] = playMatch(cellMove, topMove); }
-      if (i % 4 === 1) { newGrid[i][j] = playMatch(cellMove, leftMove); }
-      if (i % 4 === 2) { newGrid[i][j] = playMatch(cellMove, bottomMove); }
-      if (i % 4 === 3) { newGrid[i][j] = playMatch(cellMove, rightMove); }
+      if (round % 4 === 0) { newGrid[i][j] = playMatch(cellMove, topMove); }
+      if (round % 4 === 1) { newGrid[i][j] = playMatch(cellMove, leftMove); }
+      if (round % 4 === 2) { newGrid[i][j] = playMatch(cellMove, bottomMove); }
+      if (round % 4 === 3) { newGrid[i][j] = playMatch(cellMove, rightMove); }
     }
   }
-
+  round = round + 1;
+ 
   // Update the grid with the new state of each cell
   grid = newGrid;
 
@@ -103,4 +104,4 @@ setInterval(() => {
       cells[i].classList.add("scissors");
     }
   }
-}, 1000);
+}, 200);
