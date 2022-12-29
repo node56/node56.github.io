@@ -7,19 +7,19 @@ let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
         label: "Rock", // The label for the rock dataset
         data: [], // The data for the rock dataset
         backgroundColor: "#ff0000", // The fill color for the bar
-        fill: 'stack',
+        fill: 'origin',
       },
       {
         label: "Paper", // The label for the paper dataset
         data: [], // The data for the paper dataset
         backgroundColor: "#0000ff", // The fill color for the bar
-        fill: 'stack',
+        fill: '-1',
       },
       {
         label: "Scissors", // The label for the scissors dataset
         data: [], // The data for the scissors dataset
         backgroundColor: "#00ff00", // The fill color for the bar
-        fill: 'stack',
+        fill: '-1',
       }
     ]
   },
@@ -154,8 +154,8 @@ setInterval(() => {
 
   // Calculate the proportions of each item
   let rockProportion = rockTotal / total;
-  let paperProportion = paperTotal / total;
-  let scissorsProportion = scissorsTotal / total;
+  let paperProportion = paperTotal / total + paperProportion;
+  let scissorsProportion = scissorsTotal / total + scissorsProportion;
 
   // Update the chart data
   stackedProportionsChart.data.labels.push(round);
