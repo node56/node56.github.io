@@ -172,4 +172,4 @@ setInterval(() => {
     stackedProportionsChart.data.datasets[2].data.shift();
   }
   stackedProportionsChart.update(); // Update the chart
-}, 200);
+}, 100);
