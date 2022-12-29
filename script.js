@@ -127,7 +127,7 @@ setInterval(() => {
       let leftMove = grid[i][(j + GRID_HEIGHT -1) % GRID_HEIGHT];
       let rightMove = grid[i][(j + 1) % GRID_HEIGHT];
       dir = Math.floor(Math.random() * 4)
-      if (dri % 4 === 0) { newGrid[i][j] = playMatch(cellMove, topMove); }
+      if (dir % 4 === 0) { newGrid[i][j] = playMatch(cellMove, topMove); }
       if (dir % 4 === 1) { newGrid[i][j] = playMatch(cellMove, leftMove); }
       if (dir % 4 === 2) { newGrid[i][j] = playMatch(cellMove, bottomMove); }
       if (dir % 4 === 3) { newGrid[i][j] = playMatch(cellMove, rightMove); }
