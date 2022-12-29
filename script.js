@@ -25,11 +25,8 @@ let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
   },
   options: {
     scales: {
-      x: {
-      },
       y: {
-        min: 0,
-        max: 1
+        SuggestedMin: 0
       }
     },
     elements: {
