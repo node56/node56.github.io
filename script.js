@@ -158,10 +158,12 @@ setInterval(() => {
   let scissorsProportion = scissorsTotal / total;
 
   // Update the chart data
-  stackedProportionsChart.data.datasets[0].data.push(rockProportion); // Add a new data point for the rock proportion
-  stackedProportionsChart.data.datasets[1].data.push(paperProportion); // Add a new data point for the paper proportion
-  stackedProportionsChart.data.datasets[2].data.push(scissorsProportion); // Add a new data point for the scissors proportion
+  stackedProportionsChart.data.labels.push(round);
+  stackedProportionsChart.data.datasets[0].data.push(rockProportion);
+  stackedProportionsChart.data.datasets[1].data.push(paperProportion);
+  stackedProportionsChart.data.datasets[2].data.push(scissorsProportion);
   if (round > 100) {
+    stackedProportionsChart.data.labels.shift();
     stackedProportionsChart.data.datasets[0].data.shift();
     stackedProportionsChart.data.datasets[1].data.shift();
     stackedProportionsChart.data.datasets[2].data.shift();
