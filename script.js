@@ -29,8 +29,8 @@ let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
         ticks: {
           suggestedMin: 0
         }
-      }
-    }],
+      }]
+    },
     elements: {
       point: {
         radius: 1
