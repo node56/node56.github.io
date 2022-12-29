@@ -1,3 +1,36 @@
+// Initialize the chart
+let rockChart = new Chart(document.getElementById("rock-chart"), {
+  type: "line",
+  data: {
+    labels: [], // The labels for the x-axis
+    datasets: [{
+      label: "Rock", // The label for the dataset
+      data: [], // The data for the dataset
+      borderColor: "#ff0000", // The color of the line
+      fill: false, // Don't fill the area under the line
+    }]
+  },
+  options: {
+    responsive: true, // Make the chart responsive to the size of the canvas
+    scales: {
+      xAxes: [{
+        display: true, // Show the x-axis
+        scaleLabel: {
+          display: true, // Show the x-axis label
+          labelString: "Time" // The label for the x-axis
+        }
+      }],
+      yAxes: [{
+        display: true, // Show the y-axis
+        scaleLabel: {
+          display: true, // Show the y-axis label
+          labelString: "Rock Total" // The label for the y-axis
+        }
+      }]
+    }
+  }
+});
+
 // Define the size of the grid
 const GRID_WIDTH = 30;
 const GRID_HEIGHT = 30;
@@ -58,6 +91,10 @@ for (let i = 0; i < GRID_HEIGHT; i++) {
 // Play the game
 setInterval(() => {
   // Create a new grid to store the updated state of each cell
+  let rockTotal = 0;
+  let paperTotal = 0;
+  let scissorsTotal = 0;
+  
   let newGrid = [];
   for (let i = 0; i < GRID_HEIGHT; i++) {
     let row = [];
@@ -81,6 +118,10 @@ setInterval(() => {
       if (round % 4 === 1) { newGrid[i][j] = playMatch(cellMove, leftMove); }
       if (round % 4 === 2) { newGrid[i][j] = playMatch(cellMove, bottomMove); }
       if (round % 4 === 3) { newGrid[i][j] = playMatch(cellMove, rightMove); }
+      let c = newGrid[i][j];
+      if (c === "R") rockTotal++;
+      if (c === "P") paperTotal++;
+      if (c === "S") scissorsTotal++;
     }
   }
   round = round + 1;
@@ -105,4 +146,7 @@ setInterval(() => {
       cells[i].classList.add("scissors");
     }
   }
+  rockChart.data.labels.push(Date.now()); // Add a new label for the current time
+  rockChart.data.datasets[0].data.push(rockTotal); // Add a new data point for the current rock total
+  rockChart.update(); // Update the chart
 }, 200);
