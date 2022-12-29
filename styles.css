@@ -1,8 +1,8 @@
 #grid-container {
   display: flex;
   flex-wrap: wrap;
-  width: 600px;
-  height: 600px;
+  width: 660px;
+  height: 660px;
   border: 1px solid #ccc;
 }
 
