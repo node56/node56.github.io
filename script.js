@@ -1,8 +1,7 @@
 
 let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
-  type: "bar",
+  type: "line",
   data: {
-    labels: [], // The labels for the x-axis
     datasets: [
       {
         label: "Rock", // The label for the rock dataset
@@ -24,23 +23,10 @@ let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
   options: {
     responsive: true, // Make the chart responsive to the size of the canvas
     scales: {
-      xAxes: [{
-        display: true, // Show the x-axis
-        scaleLabel: {
-          display: true, // Show the x-axis label
-          labelString: "Time" // The label for the x-axis
-        }
-      }],
-      yAxes: [{
-        display: true, // Show the y-axis
-        scaleLabel: {
-          display: true, // Show the y-axis label
-          labelString: "Proportion" // The label for the y-axis
-        },
-        stacked: true, // Stack the datasets
+      y: [{
+        stacked: true,
       }]
     }
-    spanGaps: false,
   }
 });
 
@@ -168,12 +154,10 @@ setInterval(() => {
   let scissorsProportion = scissorsTotal / total;
 
   // Update the chart data
-  stackedProportionsChart.data.labels.push(round); // Add a new label for the current time
   stackedProportionsChart.data.datasets[0].data.push(rockProportion); // Add a new data point for the rock proportion
   stackedProportionsChart.data.datasets[1].data.push(paperProportion); // Add a new data point for the paper proportion
   stackedProportionsChart.data.datasets[2].data.push(scissorsProportion); // Add a new data point for the scissors proportion
   if (round > 100) {
-    stackedProportionsChart.data.labels.shift();
     stackedProportionsChart.data.datasets[0].data.shift();
     stackedProportionsChart.data.datasets[1].data.shift();
     stackedProportionsChart.data.datasets[2].data.shift();
