@@ -8,21 +8,18 @@ let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
         data: [], // The data for the rock dataset
         backgroundColor: "#808080",
         fill: 'origin',
-        pointStyle: false,
       },
       {
         label: "Paper", // The label for the paper dataset
         data: [], // The data for the paper dataset
         backgroundColor: "#ffffff",
         fill: '-1',
-        pointStyle: false,
       },
       {
         label: "Scissors", // The label for the scissors dataset
         data: [], // The data for the scissors dataset
         backgroundColor: "#c0c0c0",
         fill: '-1',
-        pointStyle: false,
       }
     ]
   },
@@ -33,6 +30,11 @@ let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
       yAxis: {
         min: 0,
         max: 1
+      }
+    },
+    elements: {
+      point: {
+        radius: 1
       }
     }
   }
