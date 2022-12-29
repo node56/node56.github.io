@@ -1,14 +1,25 @@
-// Initialize the chart
-let rockChart = new Chart(document.getElementById("rock-chart"), {
-  type: "line",
+
+let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
+  type: "bar",
   data: {
     labels: [], // The labels for the x-axis
-    datasets: [{
-      label: "Rock", // The label for the dataset
-      data: [], // The data for the dataset
-      borderColor: "#ff0000", // The color of the line
-      fill: false, // Don't fill the area under the line
-    }]
+    datasets: [
+      {
+        label: "Rock", // The label for the rock dataset
+        data: [], // The data for the rock dataset
+        backgroundColor: "#ff0000", // The fill color for the bar
+      },
+      {
+        label: "Paper", // The label for the paper dataset
+        data: [], // The data for the paper dataset
+        backgroundColor: "#0000ff", // The fill color for the bar
+      },
+      {
+        label: "Scissors", // The label for the scissors dataset
+        data: [], // The data for the scissors dataset
+        backgroundColor: "#00ff00", // The fill color for the bar
+      }
+    ]
   },
   options: {
     responsive: true, // Make the chart responsive to the size of the canvas
@@ -24,8 +35,9 @@ let rockChart = new Chart(document.getElementById("rock-chart"), {
         display: true, // Show the y-axis
         scaleLabel: {
           display: true, // Show the y-axis label
-          labelString: "Rock Total" // The label for the y-axis
-        }
+          labelString: "Proportion" // The label for the y-axis
+        },
+        stacked: true, // Stack the datasets
       }]
     }
   }
@@ -146,7 +158,18 @@ setInterval(() => {
       cells[i].classList.add("scissors");
     }
   }
-  rockChart.data.labels.push(Date.now()); // Add a new label for the current time
-  rockChart.data.datasets[0].data.push(rockTotal); // Add a new data point for the current rock total
-  rockChart.update(); // Update the chart
+  // Calculate the total number of items
+  let total = rockTotal + paperTotal + scissorsTotal;
+
+  // Calculate the proportions of each item
+  let rockProportion = rockTotal / total;
+  let paperProportion = paperTotal / total;
+  let scissorsProportion = scissorsTotal / total;
+
+  // Update the chart data
+  stackedProportionsChart.data.labels.push(Date.now()); // Add a new label for the current time
+  stackedProportionsChart.data.datasets[0].data.push(rockProportion); // Add a new data point for the rock proportion
+  stackedProportionsChart.data.datasets[1].data.push(paperProportion); // Add a new data point for the paper proportion
+  stackedProportionsChart.data.datasets[2].data.push(scissorsProportion); // Add a new data point for the scissors proportion
+  stackedProportionsChart.update(); // Update the chart
 }, 200);
