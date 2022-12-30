@@ -92,7 +92,7 @@ function getGrid(dir, grid) {
     for (let j = 0; j < GRID_WIDTH; j++) {
       let cellMove = grid[i][j];
       if (dir % 4 === 0) { newGrid[i][j] = playMatch(cellMove, grid[(i + GRID_WIDTH -1) % GRID_WIDTH][j]); }
-      if (dir % 4 === 1) { newGrid[i][j] = playMatch(cellMove, grid[i][(j + GRID_HEIGHT -1) % GRID_HEIGHT]; }
+      if (dir % 4 === 1) { newGrid[i][j] = playMatch(cellMove, grid[i][(j + GRID_HEIGHT -1) % GRID_HEIGHT]); }
       if (dir % 4 === 2) { newGrid[i][j] = playMatch(cellMove, grid[(i + 1) % GRID_WIDTH][j]); }
       if (dir % 4 === 3) { newGrid[i][j] = playMatch(cellMove, grid[i][(j + 1) % GRID_HEIGHT]); }
       let c = newGrid[i][j];
@@ -129,12 +129,18 @@ for (let i = 0; i < GRID_HEIGHT; i++) {
 
 // Play the game
 setInterval(() => {
-  const  [newGrid, rockTotal, paperTotal, scissorsTotal] = getGrid(Math.floor(Math.random() * 4), grid);
+  let m = max(rockTotal, paperTotal, scissorsTotal);
+  let off = Math.floor(Math.random() * 4);
+  let found = false;
+  for (let dir = 0; dir < 4; dir++) {
+    const  [newGrid, newRockTotal, newPaperTotal, newScissorsTotal] = getGrid(dir+off, grid);
+    let mn = max(newRockTotal, newPaperTotal, newScissorsTotal);
+    if (mn > m || (!found && dir === 3) {
+      [grid, rockTotal, paperTotal, scissorsTotal, m] = [newGrid, newRockTotal, newPaperTotal, newScissorsTotal, mn];
+      found = true;
+    }
+  }
   round++;
- 
-  // Update the grid with the new state of each cell
-  grid = newGrid;
-
   // Update the grid elements on the webpage
   let cells = gridContainer.querySelectorAll(".cell");
   for (let i = 0; i < cells.length; i++) {
