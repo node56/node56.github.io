@@ -42,6 +42,7 @@ let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
 // Define the size of the grid
 const GRID_WIDTH = 30;
 const GRID_HEIGHT = 30;
+const DIRS = [[0,1],[1,0],[0,-1],[-1,0],[-1,-1],[1,-1],[1,1],[-1,1]];
 
 // Define the possible states for each cell
 const ROCK = "R";
@@ -89,11 +90,9 @@ function getGrid(dir, grid) {
   for (let i = 0; i < GRID_HEIGHT; i++) {
     for (let j = 0; j < GRID_WIDTH; j++) {
       let cellMove = grid[i][j];
-      if (dir % 4 === 0) { newGrid[i][j] = playMatch(cellMove, grid[(i + GRID_WIDTH -1) % GRID_WIDTH][j]); }
-      if (dir % 4 === 1) { newGrid[i][j] = playMatch(cellMove, grid[i][(j + GRID_HEIGHT -1) % GRID_HEIGHT]); }
-      if (dir % 4 === 2) { newGrid[i][j] = playMatch(cellMove, grid[(i + 1) % GRID_WIDTH][j]); }
-      if (dir % 4 === 3) { newGrid[i][j] = playMatch(cellMove, grid[i][(j + 1) % GRID_HEIGHT]); }
-      let c = newGrid[i][j];
+      let d = DIRS[dir % DIRS.length];
+      let c = playMatch(cellMove, grid[(i + GRID_WIDTH + d[0]) % GRID_WIDTH][(j + GRID_HEIGHT + d[1]) % GRID_HEIGHT]);
+      newGrid[i][j] = c;
       if (c === "R") totals[0]++;
       if (c === "P") totals[1]++;
       if (c === "S") totals[2]++;
@@ -130,8 +129,8 @@ let scissorsTotal = 0;
 // Play the game
 setInterval(() => {
   let m = GRID_HEIGHT * GRID_WIDTH;
-  let off = Math.floor(Math.random() * 4);
-  for (let dir = 0; dir < 1; dir++) {
+  let off = 0;  // Math.floor(Math.random() * 4);
+  for (let dir = 0; dir < DIRS.length; dir++) {
     const  [newGrid, totals] = getGrid(dir+off, grid);
     let mn = Math.min(totals[0], totals[1], totals[2]);
     if (mn < m) {
