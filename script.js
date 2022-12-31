@@ -129,12 +129,12 @@ for (let i = 0; i < GRID_HEIGHT; i++) {
 
 // Play the game
 setInterval(() => {
-  let m = max(rockTotal, paperTotal, scissorsTotal);
+  let m = Math.max(rockTotal, paperTotal, scissorsTotal);
   let off = Math.floor(Math.random() * 4);
   let found = false;
   for (let dir = 0; dir < 4; dir++) {
     const  [newGrid, newRockTotal, newPaperTotal, newScissorsTotal] = getGrid(dir+off, grid);
-    let mn = max(newRockTotal, newPaperTotal, newScissorsTotal);
+    let mn = Math.max(newRockTotal, newPaperTotal, newScissorsTotal);
     if (mn > m || (!found && dir === 3)) {
       [grid, rockTotal, paperTotal, scissorsTotal, m] = [newGrid, newRockTotal, newPaperTotal, newScissorsTotal, mn];
       found = true;
