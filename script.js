@@ -131,7 +131,7 @@ let scissorsTotal = 0;
 setInterval(() => {
   let m = GRID_HEIGHT * GRID_WIDTH;
   let off = Math.floor(Math.random() * 4);
-  for (let dir = 0; dir < 4; dir++) {
+  for (let dir = 0; dir < 1; dir++) {
     const  [newGrid, totals] = getGrid(dir+off, grid);
     let mn = Math.min(totals[0], totals[1], totals[2]);
     if (mn < m) {
