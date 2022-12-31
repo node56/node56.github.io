@@ -128,7 +128,7 @@ for (let i = 0; i < GRID_HEIGHT; i++) {
 setInterval(() => {
   let m = GRID_HEIGHT * GRID_WIDTH;
   let off = Math.floor(Math.random() * 8);
-  const  [grid, totals] = getGrid(off, grid);
+  [grid, totals] = getGrid(off, grid);
   round++;
   // Update the grid elements on the webpage
   let cells = gridContainer.querySelectorAll(".cell");
