@@ -74,9 +74,7 @@ function playMatch(player1, player2) {
 }
 function getGrid(dir, grid) {
     // Create a new grid to store the updated state of each cell
-  let rockTotal = 0;
-  let paperTotal = 0;
-  let scissorsTotal = 0;
+  let totals = [0,0,0];
   
   let newGrid = [];
   for (let i = 0; i < GRID_HEIGHT; i++) {
@@ -96,12 +94,12 @@ function getGrid(dir, grid) {
       if (dir % 4 === 2) { newGrid[i][j] = playMatch(cellMove, grid[(i + 1) % GRID_WIDTH][j]); }
       if (dir % 4 === 3) { newGrid[i][j] = playMatch(cellMove, grid[i][(j + 1) % GRID_HEIGHT]); }
       let c = newGrid[i][j];
-      if (c === "R") rockTotal++;
-      if (c === "P") paperTotal++;
-      if (c === "S") scissorsTotal++;
+      if (c === "R") totals[0]++;
+      if (c === "P") totals[1]++;
+      if (c === "S") totals[2]++;
     }
   }
-  return [newGrid, rockTotal, paperTotal, scissorsTotal];
+  return [newGrid, totals];
 }
 
 // Create the grid elements and add them to the webpage
@@ -126,17 +124,19 @@ for (let i = 0; i < GRID_HEIGHT; i++) {
     gridContainer.appendChild(cell);
   }
 }
-
+let rockTotal = 0;
+let paperTotal = 0;
+let scissorsTotal = 0;
 // Play the game
 setInterval(() => {
   let m = Math.max(rockTotal, paperTotal, scissorsTotal);
   let off = Math.floor(Math.random() * 4);
   let found = false;
   for (let dir = 0; dir < 4; dir++) {
-    const  [newGrid, newRockTotal, newPaperTotal, newScissorsTotal] = getGrid(dir+off, grid);
-    let mn = Math.max(newRockTotal, newPaperTotal, newScissorsTotal);
+    const  [newGrid, totals] = getGrid(dir+off, grid);
+    let mn = Math.max(totals[0], totals[1], totals[2]);
     if (mn > m || (!found && dir === 3)) {
-      [grid, rockTotal, paperTotal, scissorsTotal, m] = [newGrid, newRockTotal, newPaperTotal, newScissorsTotal, mn];
+      [grid, rockTotal, paperTotal, scissorsTotal, m] = [newGrid, totals[0], totals[1], totals[2], mn];
       found = true;
     }
   }
