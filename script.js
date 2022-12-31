@@ -87,15 +87,14 @@ function getGrid(dir, grid) {
   }
 
   // Iterate over each cell in the grid
+  let totals = {ROCK:0, PAPER:0, SCISSORS:0};
   for (let i = 0; i < GRID_HEIGHT; i++) {
     for (let j = 0; j < GRID_WIDTH; j++) {
       let cellMove = grid[i][j];
       let d = DIRS[dir % DIRS.length];
       let c = playMatch(cellMove, grid[(i + GRID_WIDTH + d[0]) % GRID_WIDTH][(j + GRID_HEIGHT + d[1]) % GRID_HEIGHT]);
       newGrid[i][j] = c;
-      if (c === "R") totals[0]++;
-      if (c === "P") totals[1]++;
-      if (c === "S") totals[2]++;
+      totals[c]++;
     }
   }
   return [newGrid, totals];
@@ -148,9 +147,9 @@ setInterval(() => {
     }
   }
   const total = GRID_WIDTH * GRID_HEIGHT;
-  let rockProportion = totals[0] / total;
-  let paperProportion = totals[1] / total + rockProportion;
-  let scissorsProportion = totals[2] / total + paperProportion;
+  let rockProportion = totals[ROCK] / total;
+  let paperProportion = totals[PAPER] / total + rockProportion;
+  let scissorsProportion = totals[SCISSORS] / total + paperProportion;
 
   // Update the chart data
   stackedProportionsChart.data.labels.push(round);
