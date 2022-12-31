@@ -123,20 +123,12 @@ for (let i = 0; i < GRID_HEIGHT; i++) {
     gridContainer.appendChild(cell);
   }
 }
-let rockTotal = 0;
-let paperTotal = 0;
-let scissorsTotal = 0;
+
 // Play the game
 setInterval(() => {
   let m = GRID_HEIGHT * GRID_WIDTH;
-  let off = 0;  // Math.floor(Math.random() * 4);
-  for (let dir = 0; dir < DIRS.length; dir++) {
-    const  [newGrid, totals] = getGrid(dir+off, grid);
-    let mn = Math.min(totals[0], totals[1], totals[2]);
-    if (mn < m) {
-      [grid, rockTotal, paperTotal, scissorsTotal, m] = [newGrid, totals[0], totals[1], totals[2], mn];
-    }
-  }
+  let off = Math.floor(Math.random() * 8);
+  const  [grid, totals] = getGrid(off, grid);
   round++;
   // Update the grid elements on the webpage
   let cells = gridContainer.querySelectorAll(".cell");
@@ -155,13 +147,10 @@ setInterval(() => {
       cells[i].classList.add("scissors");
     }
   }
-  // Calculate the total number of items
-  let total = rockTotal + paperTotal + scissorsTotal;
-
-  // Calculate the proportions of each item
-  let rockProportion = rockTotal / total;
-  let paperProportion = paperTotal / total + rockProportion;
-  let scissorsProportion = scissorsTotal / total + paperProportion;
+  const total = GRID_WIDTH * GRID_HEIGHT;
+  let rockProportion = totals[0] / total;
+  let paperProportion = totals[1] / total + rockProportion;
+  let scissorsProportion = totals[2] / total + paperProportion;
 
   // Update the chart data
   stackedProportionsChart.data.labels.push(round);
