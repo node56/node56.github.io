@@ -129,15 +129,13 @@ let paperTotal = 0;
 let scissorsTotal = 0;
 // Play the game
 setInterval(() => {
-  let m = Math.max(rockTotal, paperTotal, scissorsTotal);
+  let m = GRID_HEIGHT * GRID_WIDTH;
   let off = Math.floor(Math.random() * 4);
-  let found = false;
   for (let dir = 0; dir < 4; dir++) {
     const  [newGrid, totals] = getGrid(dir+off, grid);
-    let mn = Math.max(totals[0], totals[1], totals[2]);
-    if (mn > m || (!found && dir === 3)) {
+    let mn = Math.min(totals[0], totals[1], totals[2]);
+    if (mn < m) {
       [grid, rockTotal, paperTotal, scissorsTotal, m] = [newGrid, totals[0], totals[1], totals[2], mn];
-      found = true;
     }
   }
   round++;
