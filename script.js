@@ -135,7 +135,7 @@ setInterval(() => {
   for (let dir = 0; dir < 4; dir++) {
     const  [newGrid, newRockTotal, newPaperTotal, newScissorsTotal] = getGrid(dir+off, grid);
     let mn = max(newRockTotal, newPaperTotal, newScissorsTotal);
-    if (mn > m || (!found && dir === 3) {
+    if (mn > m || (!found && dir === 3)) {
       [grid, rockTotal, paperTotal, scissorsTotal, m] = [newGrid, newRockTotal, newPaperTotal, newScissorsTotal, mn];
       found = true;
     }
