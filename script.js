@@ -74,9 +74,6 @@ function playMatch(player1, player2) {
   }
 }
 function getGrid(dir, grid) {
-    // Create a new grid to store the updated state of each cell
-  let totals = [0,0,0];
-  
   let newGrid = [];
   for (let i = 0; i < GRID_HEIGHT; i++) {
     let row = [];
@@ -85,8 +82,6 @@ function getGrid(dir, grid) {
     }
     newGrid.push(row);
   }
-
-  // Iterate over each cell in the grid
   let totals = {ROCK:0, PAPER:0, SCISSORS:0};
   for (let i = 0; i < GRID_HEIGHT; i++) {
     for (let j = 0; j < GRID_WIDTH; j++) {
