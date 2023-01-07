@@ -82,7 +82,10 @@ function getGrid(dir, grid) {
     }
     newGrid.push(row);
   }
-  let totals = {ROCK:0, PAPER:0, SCISSORS:0};
+  let totals = {};
+  totals[ROCK]=0;
+  totals[PAPER]=0;
+  totals[SCISSORS]=0;
   for (let i = 0; i < GRID_HEIGHT; i++) {
     for (let j = 0; j < GRID_WIDTH; j++) {
       let cellMove = grid[i][j];
@@ -122,6 +125,7 @@ for (let i = 0; i < GRID_HEIGHT; i++) {
 setInterval(() => {
   let m = GRID_HEIGHT * GRID_WIDTH;
   let off = Math.floor(Math.random() * 8);
+  let totals = {};
   [grid, totals] = getGrid(off, grid);
   round++;
   // Update the grid elements on the webpage
