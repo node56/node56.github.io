@@ -1,4 +1,3 @@
-
 let stackedProportionsChart = new Chart(document.getElementById("rock-chart"), {
   type: "line",
   data: {
