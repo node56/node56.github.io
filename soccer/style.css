@@ -1,0 +1,25 @@
+/* Basic styling for the soccer match tracker */
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color: #0077b6;
+}
+
+#match-info {
+    background-color: #fafafa;
+    padding: 10px;
+}
+
+#controls {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+button {
+    background-color: #eee;
+    border: none;
+    padding: 5px 10px;
+}
