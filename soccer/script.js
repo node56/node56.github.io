@@ -72,10 +72,6 @@ if (localStorage.getItem('startTime')) {
     startTime = parseInt(localStorage.getItem('startTime'));
 }
 
-let startTime = 0;
-let timeLeft = 0;
-let score = [0,0];
-
 // Function to start the half
 function startHalf() {
     startTime = Date.now();
